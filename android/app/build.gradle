@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.application'
+}
+
+// 워크플로에서 -PcontentBase=https://<계정>.github.io/<저장소>/data/ 로 넘겨줌
+def contentBase = (project.findProperty('contentBase') ?: 'https://example.github.io/sinpung-sim/data/').toString()
+def vcode = (project.findProperty('versionCode') ?: '1').toString().toInteger()
+def ks = System.getenv('KEYSTORE_FILE')
+
+android {
+    namespace 'kr.sinpung.simulator'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'kr.sinpung.simulator'
+        minSdk 26
+        targetSdk 35
+        versionCode vcode
+        versionName "1.0.${vcode}"
+        buildConfigField 'String', 'CONTENT_BASE', "\"${contentBase}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    signingConfigs {
+        release {
+            if (ks) {
+                storeFile file(ks)
+                storePassword System.getenv('KEYSTORE_PASSWORD')
+                keyAlias System.getenv('KEY_ALIAS')
+                keyPassword System.getenv('KEY_PASSWORD')
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig ks ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

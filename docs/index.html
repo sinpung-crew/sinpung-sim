@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#173e6d">
+<title>신풍승무 통합시뮬레이터</title>
+<style>
+:root{--bg:#eef3f8;--card:#fff;--ink:#14263a;--sub:#4d6075;--line:#c9d6e3;--brand:#173e6d;--brand2:#1f5fa8;--err:#c62828;--ok:#1b7f3b}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+#gate{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.card{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 22px;box-shadow:0 10px 30px rgba(20,40,70,.10)}
+.badge{display:inline-block;background:#e3edf8;color:var(--brand);font-weight:800;font-size:14px;border-radius:999px;padding:5px 12px}
+h1{font-size:26px;line-height:1.3;margin:14px 0 6px}
+.lead{margin:0 0 22px;color:var(--sub);font-size:16px;line-height:1.5}
+label.f{display:block;font-weight:800;font-size:17px;margin-bottom:8px}
+input[type=password],input[type=text]{width:100%;font-size:22px;padding:14px 14px;border:2px solid var(--line);border-radius:12px;outline:none;background:#fbfdff;color:var(--ink)}
+input:focus{border-color:var(--brand2)}
+.row{display:flex;align-items:center;gap:10px;margin:14px 0 4px;font-size:16px;color:var(--sub)}
+.row input{width:22px;height:22px}
+button.go{width:100%;margin-top:18px;font-size:21px;font-weight:900;padding:16px;border:0;border-radius:14px;background:var(--brand);color:#fff;cursor:pointer}
+button.go:disabled{opacity:.55}
+.msg{min-height:24px;margin-top:12px;font-size:16px;font-weight:700}
+.msg.err{color:var(--err)}
+.prog{display:none;margin-top:18px}
+.bar{height:14px;background:#e1e9f1;border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand2),#3aa0ff);transition:width .2s}
+.prog p{margin:8px 0 0;font-size:15px;color:var(--sub)}
+.meta{margin-top:20px;padding-top:14px;border-top:1px dashed var(--line);font-size:14px;color:var(--sub);line-height:1.6}
+.apk{display:none;margin-top:12px;text-align:center}
+.apk a{display:inline-block;font-size:17px;font-weight:800;color:var(--brand2);text-decoration:none;border:2px solid var(--brand2);border-radius:12px;padding:10px 16px}
+#app{position:fixed;inset:0;width:100%;height:100%;border:0;display:none;background:#fff}
+#reset{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--card:#16212d;--ink:#e8eef5;--sub:#9fb0c2;--line:#2b3b4d;--brand:#3a7bd5;--brand2:#64a6ff}}
+:root[data-theme="dark"]{--bg:#0f1720;--card:#16212d;--ink:#e8eef5;--sub:#9fb0c2;--line:#2b3b4d;--brand:#3a7bd5;--brand2:#64a6ff}
+</style>
+</head>
+<body>
+<div id="gate">
+  <div class="card">
+    <span class="badge">서울교통공사 7호선 · 신풍승무</span>
+    <h1>통합시뮬레이터</h1>
+    <p class="lead">구원운전 · MR관 파열조치</p>
+    <form id="f" autocomplete="on">
+      <label class="f" for="pw">비밀번호</label>
+      <input id="pw" type="password" inputmode="text" autocomplete="current-password" required>
+      <div class="row"><input id="remember" type="checkbox" checked><label for="remember">이 기기에서 비밀번호 기억</label></div>
+      <button class="go" id="go" type="submit">시작하기</button>
+    </form>
+    <div class="msg" id="msg"></div>
+    <div class="prog" id="prog"><div class="bar"><i id="barfill"></i></div><p id="progtext">준비 중…</p></div>
+    <div class="meta" id="meta"></div>
+    <div class="apk" id="apk"><a id="apklink" href="#">안드로이드 앱 설치 파일 받기</a></div>
+  </div>
+</div>
+<iframe id="app" title="신풍승무 통합시뮬레이터" allow="autoplay; fullscreen"></iframe>
+<script>
+(function(){
+'use strict';
+const DATA = 'data/';
+const CHECK = 'SINPUNG-SIM-OK';
+const KEY_STORE = 'sinpung-sim-key';
+const $ = id => document.getElementById(id);
+const msg = (t, err) => { $('msg').textContent = t || ''; $('msg').className = 'msg' + (err ? ' err' : ''); };
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const b64e = u8 => btoa(String.fromCharCode.apply(null, u8));
+const store = {
+  get(){ try { return JSON.parse(localStorage.getItem(KEY_STORE) || 'null'); } catch(e){ return null; } },
+  set(v){ try { localStorage.setItem(KEY_STORE, JSON.stringify(v)); } catch(e){} },
+  clear(){ try { localStorage.removeItem(KEY_STORE); } catch(e){} }
+};
+let manifest = null;
+
+// 안드로이드 앱 설치 링크 (GitHub 저장소의 최신 릴리스)
+try {
+  const owner = location.hostname.split('.')[0];
+  const repo = location.pathname.split('/').filter(Boolean)[0];
+  if (/github\.io$/.test(location.hostname) && repo && /Android/i.test(navigator.userAgent) && !/SinpungSimApp/.test(navigator.userAgent)) {
+    $('apklink').href = 'https://github.com/' + owner + '/' + repo + '/releases/latest/download/sinpung-sim.apk';
+    $('apk').style.display = 'block';
+  }
+} catch(e){}
+
+async function deriveKey(password, saltB64, iter){
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
+  const bits = new Uint8Array(await crypto.subtle.deriveBits({name:'PBKDF2', hash:'SHA-256', salt:b64(saltB64), iterations:iter}, base, 512));
+  return bits.slice(0, 32);
+}
+async function importAes(raw){ return crypto.subtle.importKey('raw', raw, 'AES-GCM', false, ['decrypt']); }
+async function decrypt(key, u8){
+  return new Uint8Array(await crypto.subtle.decrypt({name:'AES-GCM', iv:u8.subarray(0,12)}, key, u8.subarray(12)));
+}
+async function checkKey(key){
+  try { return new TextDecoder().decode(await decrypt(key, b64(manifest.check))) === CHECK; } catch(e){ return false; }
+}
+
+async function loadManifest(){
+  const r = await fetch(DATA + 'manifest.json?t=' + Date.now(), {cache:'no-store'});
+  if (!r.ok) throw new Error('목록을 불러오지 못했습니다 (' + r.status + ')');
+  manifest = await r.json();
+  $('meta').innerHTML = '현재 버전 <b>' + manifest.version + '</b>' + (manifest.updated ? ' · ' + manifest.updated : '') +
+    (manifest.note ? '<br>변경 내용: ' + manifest.note.replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) : '');
+}
+
+async function getEncrypted(entry, cache){
+  const url = DATA + 'f/' + entry.id + '.bin';
+  if (cache) { try { const hit = await cache.match(url); if (hit) return new Uint8Array(await hit.arrayBuffer()); } catch(e){} }
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('파일을 받지 못했습니다 (' + r.status + ')');
+  const buf = await r.arrayBuffer();
+  if (cache) { try { await cache.put(url, new Response(buf.slice(0))); } catch(e){} }
+  return new Uint8Array(buf);
+}
+
+const MIME = {html:'text/html;charset=utf-8', png:'image/png', gif:'image/gif', webp:'image/webp', jpg:'image/jpeg', svg:'image/svg+xml', mp4:'video/mp4', mp3:'audio/mpeg', woff2:'font/woff2'};
+
+async function openSim(key){
+  $('prog').style.display = 'block'; $('go').disabled = true;
+  let cache = null;
+  try { if (window.caches) cache = await caches.open('sinpung-sim-enc'); } catch(e){}
+  const files = manifest.files, total = files.reduce((a, e) => a + e.size, 0);
+  let done = 0, count = 0, html = '';
+  const urls = {};
+  const queue = files.slice();
+  async function worker(){
+    while (queue.length){
+      const e = queue.shift();
+      const enc = await getEncrypted(e, cache);
+      const plain = await decrypt(key, enc);
+      const ext = e.path.split('.').pop().toLowerCase();
+      if (e.path === manifest.entry) html = new TextDecoder().decode(plain);
+      else urls[e.path] = URL.createObjectURL(new Blob([plain], {type: MIME[ext] || 'application/octet-stream'}));
+      done += e.size; count++;
+      $('barfill').style.width = (done / total * 100).toFixed(1) + '%';
+      $('progtext').textContent = '내려받는 중 ' + count + ' / ' + files.length + '  (' + (done/1e6).toFixed(1) + ' / ' + (total/1e6).toFixed(1) + ' MB)';
+    }
+  }
+  await Promise.all([worker(), worker(), worker(), worker()]);
+  // 지난 버전의 캐시 정리
+  if (cache) { try { const keep = new Set(files.map(e => e.id)); for (const req of await cache.keys()) { const m = req.url.match(/f\/([0-9a-f]+)\.bin/); if (m && !keep.has(m[1])) cache.delete(req); } } catch(e){} }
+  for (const p in urls) html = html.split(p).join(urls[p]);
+  const frame = $('app');
+  frame.src = URL.createObjectURL(new Blob([html], {type:'text/html;charset=utf-8'}));
+  frame.style.display = 'block';
+  $('gate').style.display = 'none';
+  document.title = '신풍승무 통합시뮬레이터 · ' + manifest.version;
+}
+
+async function start(password){
+  msg('');
+  const saved = store.get();
+  let raw = null;
+  if (!password && saved && saved.salt === manifest.kdf.salt) raw = b64(saved.key);
+  if (!raw) {
+    if (!password) return false;
+    $('go').disabled = true; msg('비밀번호 확인 중…');
+    raw = await deriveKey(password, manifest.kdf.salt, manifest.kdf.iter);
+  }
+  const key = await importAes(raw);
+  if (!(await checkKey(key))) {
+    store.clear(); $('go').disabled = false;
+    msg(password ? '비밀번호가 맞지 않습니다.' : '', !!password);
+    return false;
+  }
+  if (password && $('remember').checked) store.set({salt: manifest.kdf.salt, key: b64e(raw)});
+  msg('');
+  await openSim(key);
+  return true;
+}
+
+$('f').addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const pw = $('pw').value.trim();
+  if (!pw) return;
+  try { await start(pw); }
+  catch(e){ $('go').disabled = false; $('prog').style.display = 'none'; msg(e.message || '오류가 발생했습니다.', true); }
+});
+
+(async () => {
+  if (!window.crypto || !crypto.subtle) { msg('이 브라우저에서는 열 수 없습니다. 크롬이나 삼성 인터넷으로 열어 주세요.', true); return; }
+  try {
+    await loadManifest();
+    if (await start(null)) return;   // 기억된 비밀번호로 바로 열기
+    $('pw').focus();
+  } catch(e){ msg(e.message || '불러오지 못했습니다. 인터넷 연결을 확인해 주세요.', true); $('go').disabled = false; }
+})();
+})();
+</script>
+</body>
+</html>

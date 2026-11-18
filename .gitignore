@@ -1,0 +1,16 @@
+# 암호화 전 원본은 절대 올리지 않습니다
+*.html
+!docs/index.html
+plain/
+_plain/
+*.p12
+*.jks
+*.keystore
+# 빌드 결과물
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+.DS_Store
+__pycache__/
+*.pyc
