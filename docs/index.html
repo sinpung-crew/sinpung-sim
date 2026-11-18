@@ -76,6 +76,9 @@ details.steps p{font-size:14.5px;color:var(--sub);line-height:1.55;margin:6px 0 
       <div class="kakao" id="kakaoBox" hidden>카카오톡 안에서는 설치 파일이 받아지지 않을 수 있어요.
         <a class="dl" id="extDl" href="#">인터넷 앱에서 설치 파일 받기</a>
         (안 되면 오른쪽 위 ⋮ → <b>다른 브라우저로 열기</b>)</div>
+      <div class="kakao" id="inappBox" hidden>밴드 등 앱 안의 화면에서는 설치 파일이 안 받아질 수 있어요.
+        <a class="dl" id="chromeDl" href="#">크롬에서 설치 파일 받기</a>
+        (안 되면 오른쪽 위 메뉴에서 <b>다른 브라우저로 열기</b> 또는 <b>기본 브라우저로 열기</b>)</div>
       <a class="dl" id="apkDl" href="#">구원GO 앱 설치 파일 받기</a>
       <details class="steps">
         <summary>설치 방법 보기</summary>
@@ -115,6 +118,8 @@ let manifest = null;
 const UA = navigator.userAgent;
 const IS_ANDROID = /Android/i.test(UA) && !/SinpungSimApp/.test(UA) && !/[?&]web=1/.test(location.search);
 const IS_KAKAO = /KAKAOTALK/i.test(UA);
+// 밴드·네이버·인스타그램 등 앱 안의 브라우저 (안드로이드 WebView 표시 '; wv)' 포함)
+const IS_INAPP = !IS_KAKAO && (/; wv\)|\bBAND\/|NAVER\(inapp|Line\/|Instagram|FBAN|FBAV|DaumApps/i.test(UA));
 let APK_URL = 'https://github.com/sinpung-crew/sinpung-sim/releases/latest/download/sinpung-sim.apk';
 try {
   const owner = location.hostname.split('.')[0];
@@ -129,6 +134,10 @@ function showAppPrompt(key){
     $('kakaoBox').hidden = false;
     $('extDl').href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(APK_URL);
     $('apkDl').hidden = true;
+  } else if (IS_INAPP) {
+    $('inappBox').hidden = false;
+    const u = APK_URL.replace(/^https:\/\//, '');
+    $('chromeDl').href = 'intent://' + u + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(APK_URL) + ';end';
   }
   $('appPrompt').hidden = false;
   $('appPrompt').after($('meta')); // 버전 정보는 아래로
