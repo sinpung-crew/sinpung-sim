@@ -1,6 +1,6 @@
 # 암호화 전 원본은 절대 올리지 않습니다
 *.html
-!docs/index.html
+!docs/*.html
 plain/
 _plain/
 *.p12

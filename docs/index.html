@@ -78,7 +78,7 @@ try {
   const owner = location.hostname.split('.')[0];
   const repo = location.pathname.split('/').filter(Boolean)[0];
   if (/github\.io$/.test(location.hostname) && repo && /Android/i.test(navigator.userAgent) && !/SinpungSimApp/.test(navigator.userAgent)) {
-    $('apklink').href = 'https://github.com/' + owner + '/' + repo + '/releases/latest/download/sinpung-sim.apk';
+    $('apklink').href = 'app.html';
     $('apk').style.display = 'block';
   }
 } catch(e){}
