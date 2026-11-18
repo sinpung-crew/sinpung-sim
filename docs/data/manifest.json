@@ -1,8 +1,8 @@
 {
  "format": 1,
- "version": "2026.11.18-3",
- "updated": "2026-11-18 17:38",
- "note": "휴대폰 세로 화면: 8량 유지, 열차 높이·또타 크기 조정",
+ "version": "2026.11.18-4",
+ "updated": "2026-11-18 18:00",
+ "note": "창문 속 또타 위치 수정, 가로 화면 지원",
  "kdf": {
   "alg": "PBKDF2-SHA256",
   "iter": 200000,
@@ -13,9 +13,9 @@
  "files": [
   {
    "path": "index.html",
-   "id": "c3a57a73b9fe30d5039d",
-   "sha256": "c3a57a73b9fe30d5039d62f1396e2dafed6db55adecfe5ab4fc4629186c12eb1",
-   "size": 152624
+   "id": "ff7ea58faeb0534616a7",
+   "sha256": "ff7ea58faeb0534616a7e21e3fe038158aec142e9cc313d83afa028d7608334d",
+   "size": 153097
   },
   {
    "path": "a/6441d0de854480d8.png",
