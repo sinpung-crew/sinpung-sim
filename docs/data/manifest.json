@@ -1,8 +1,8 @@
 {
  "format": 1,
- "version": "2026.11.18-2",
- "updated": "2026-11-18 17:27",
- "note": "휴대폰 세로 화면 열차·또타 크기 조정",
+ "version": "2026.11.18-3",
+ "updated": "2026-11-18 17:38",
+ "note": "휴대폰 세로 화면: 8량 유지, 열차 높이·또타 크기 조정",
  "kdf": {
   "alg": "PBKDF2-SHA256",
   "iter": 200000,
@@ -13,9 +13,9 @@
  "files": [
   {
    "path": "index.html",
-   "id": "b25b8d7f2aa45f72d870",
-   "sha256": "b25b8d7f2aa45f72d870c0a18265ba74cd182d195cbbd552530d862b08e9cc49",
-   "size": 153111
+   "id": "c3a57a73b9fe30d5039d",
+   "sha256": "c3a57a73b9fe30d5039d62f1396e2dafed6db55adecfe5ab4fc4629186c12eb1",
+   "size": 152624
   },
   {
    "path": "a/6441d0de854480d8.png",

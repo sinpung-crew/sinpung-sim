@@ -74,9 +74,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: app-v1.0.${{ github.run_number }}
-          name: 신풍승무 시뮬레이터 앱 1.0.${{ github.run_number }}
+          name: 구원GO신풍 앱 1.0.${{ github.run_number }}
           body: |
-            안드로이드 설치 파일입니다. 휴대폰에서 sinpung-sim.apk 를 눌러 설치하세요.
+            구원GO신풍 안드로이드 설치 파일입니다. 휴대폰에서 sinpung-sim.apk 를 눌러 설치하세요.
             시뮬레이터 내용(규정 변경 등)은 앱을 켤 때 자동으로 업데이트되므로, 앱을 다시 설치할 필요가 없습니다.
           files: sinpung-sim.apk
           make_latest: true

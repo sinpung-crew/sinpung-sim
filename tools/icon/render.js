@@ -4,7 +4,8 @@ const fg=`<g>
  <rect x="31" y="24" width="46" height="60" rx="11" fill="#ffffff"/>
  <rect x="31" y="24" width="46" height="60" rx="11" fill="none" stroke="#0d2747" stroke-width="2.4"/>
  <rect x="36" y="30" width="36" height="22" rx="5" fill="#173e6d"/>
- <path d="M38 33 L50 33 L44 49 L38 49 Z" fill="#ffffff" opacity=".18"/>
+ <path d="M38 33 L45 33 L40 49 L38 49 Z" fill="#ffffff" opacity=".14"/>
+ <text x="54.5" y="47.2" text-anchor="middle" transform="skewX(-14)" transform-origin="54.5 41" font-family="Arial Black,Arial,Helvetica,sans-serif" font-weight="900" font-style="italic" font-size="16.5" letter-spacing=".4" fill="#ffffff">SP</text>
  <rect x="36" y="58" width="36" height="5" rx="2.5" fill="#747f00"/>
  <circle cx="41.5" cy="72" r="4.2" fill="#ffd34d" stroke="#0d2747" stroke-width="1.6"/>
  <circle cx="66.5" cy="72" r="4.2" fill="#ffd34d" stroke="#0d2747" stroke-width="1.6"/>

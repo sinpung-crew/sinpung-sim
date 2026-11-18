@@ -102,7 +102,7 @@ public class MainActivity extends Activity {
         overlay.setPadding(dp(28), dp(28), dp(28), dp(28));
 
         TextView title = new TextView(this);
-        title.setText("신풍승무\n통합시뮬레이터");
+        title.setText("구원GO\nby 신풍승무");
         title.setTextColor(0xFF14263A);
         title.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 28);
         title.setTypeface(Typeface.DEFAULT_BOLD);
