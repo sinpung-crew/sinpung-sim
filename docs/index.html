@@ -12,6 +12,7 @@
 <style>
 :root{--bg:#eef3f8;--card:#fff;--ink:#14263a;--sub:#4d6075;--line:#c9d6e3;--brand:#173e6d;--brand2:#1f5fa8;--err:#c62828;--ok:#1b7f3b}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:"Pretendard","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif}
 #gate{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px 16px}
 .card{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 22px;box-shadow:0 10px 30px rgba(20,40,70,.10)}
@@ -36,6 +37,18 @@ button.go:disabled{opacity:.55}
 .apk{display:none;margin-top:12px;text-align:center}
 .apk a{display:inline-block;font-size:17px;font-weight:800;color:var(--brand2);text-decoration:none;border:2px solid var(--brand2);border-radius:12px;padding:10px 16px}
 #reset{display:none}
+.appprompt h2{font-size:21px;line-height:1.35;margin:6px 0 8px}
+.okline{margin:0;color:var(--ok);font-weight:900;font-size:16px}
+.why{margin:0 0 6px;color:var(--sub);font-size:16px;line-height:1.55}
+a.dl{display:block;text-align:center;margin-top:16px;font-size:21px;font-weight:900;padding:17px;border-radius:14px;background:var(--brand);color:#fff;text-decoration:none}
+button.web{width:100%;margin-top:12px;font-size:17px;font-weight:800;padding:13px;border-radius:12px;border:2px solid var(--brand2);background:transparent;color:var(--brand2);cursor:pointer}
+.kakao{background:#fff4d6;color:#7a4f00;border-radius:12px;padding:13px 14px;font-size:15.5px;line-height:1.55;font-weight:700;margin-top:14px}
+.kakao a.dl{margin-top:10px;font-size:19px;padding:14px}
+details.steps{margin-top:16px;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+details.steps summary{font-size:17px;font-weight:800;cursor:pointer;color:var(--brand2)}
+details.steps ol{margin:10px 0 0;padding-left:22px}
+details.steps li{font-size:16px;line-height:1.6;margin:0 0 9px}
+details.steps p{font-size:14.5px;color:var(--sub);line-height:1.55;margin:6px 0 0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1720;--card:#16212d;--ink:#e8eef5;--sub:#9fb0c2;--line:#2b3b4d;--brand:#3a7bd5;--brand2:#64a6ff}}
 :root[data-theme="dark"]{--bg:#0f1720;--card:#16212d;--ink:#e8eef5;--sub:#9fb0c2;--line:#2b3b4d;--brand:#3a7bd5;--brand2:#64a6ff}
 </style>
@@ -55,8 +68,30 @@ button.go:disabled{opacity:.55}
     <div class="msg" id="msg"></div>
     <div class="prog" id="prog"><div class="bar"><i id="barfill"></i></div><p id="progtext">준비 중…</p></div>
     <div class="meta" id="meta"></div>
-    <p class="hint">카카오톡에서 화면이 안 나오면 오른쪽 위 메뉴(⋮)에서 <b>다른 브라우저로 열기</b>를 눌러 주세요.</p>
-    <div class="apk" id="apk"><a id="apklink" href="#">구원GO 앱 설치하기</a></div>
+    <p class="hint" id="hint">카카오톡에서 화면이 안 나오면 오른쪽 위 메뉴(⋮)에서 <b>다른 브라우저로 열기</b>를 눌러 주세요.</p>
+    <div class="appprompt" id="appPrompt" hidden>
+      <p class="okline">✓ 비밀번호 확인 완료</p>
+      <h2>안드로이드 휴대폰은<br>구원GO 앱으로 보세요</h2>
+      <p class="why">앱을 설치하면 홈 화면 아이콘으로 바로 열리고, 인터넷이 없어도 실행됩니다. 규정이 바뀌면 앱을 켤 때 자동으로 최신 내용이 됩니다.</p>
+      <div class="kakao" id="kakaoBox" hidden>카카오톡 안에서는 설치 파일이 받아지지 않을 수 있어요.
+        <a class="dl" id="extDl" href="#">인터넷 앱에서 설치 파일 받기</a>
+        (안 되면 오른쪽 위 ⋮ → <b>다른 브라우저로 열기</b>)</div>
+      <a class="dl" id="apkDl" href="#">구원GO 앱 설치 파일 받기</a>
+      <details class="steps">
+        <summary>설치 방법 보기</summary>
+        <ol>
+          <li><b>설치 파일 받기</b>를 누릅니다. "유해할 수 있는 파일" 안내가 나오면 <b>다운로드</b>를 누릅니다.</li>
+          <li>다운로드가 끝나면 <b>열기</b>를 누릅니다.</li>
+          <li>"출처를 알 수 없는 앱" 안내가 나오면 <b>설정 → 이 출처 허용</b>을 켜고 뒤로 돌아옵니다.</li>
+          <li><b>설치</b>를 누릅니다. Google Play 프로텍트 안내가 나오면 <b>세부정보 → 무시하고 설치</b>를 누릅니다.</li>
+          <li><b>열기</b> → 비밀번호를 한 번 더 넣으면 내용을 받아 옵니다. (약 28MB, 와이파이 권장)</li>
+        </ol>
+        <p>홈 화면에 아이콘이 없으면 앱 목록에서 <b>구원GO신풍</b>을 길게 눌러 <b>홈 화면에 추가</b>를 누르세요.</p>
+        <p>"자동 차단"으로 설치가 막히면: 설정 → 보안 및 개인정보 보호 → <b>자동 차단</b>을 잠시 끄고 설치한 뒤 다시 켜세요.</p>
+        <p>이미 앱을 설치했다면 홈 화면의 <b>구원GO신풍</b> 아이콘으로 여시면 됩니다.</p>
+      </details>
+      <button class="web" id="webBtn" type="button">이번에는 웹으로 보기</button>
+    </div>
   </div>
 </div>
 <script>
@@ -76,15 +111,32 @@ const store = {
 };
 let manifest = null;
 
-// 안드로이드 앱 설치 링크 (GitHub 저장소의 최신 릴리스)
+// 안드로이드(앱이 아닌 브라우저)에서는 비밀번호 확인 후 앱 설치를 권장한다. 아이폰·PC는 바로 웹으로 연다.
+const UA = navigator.userAgent;
+const IS_ANDROID = /Android/i.test(UA) && !/SinpungSimApp/.test(UA) && !/[?&]web=1/.test(location.search);
+const IS_KAKAO = /KAKAOTALK/i.test(UA);
+let APK_URL = 'https://github.com/sinpung-crew/sinpung-sim/releases/latest/download/sinpung-sim.apk';
 try {
   const owner = location.hostname.split('.')[0];
   const repo = location.pathname.split('/').filter(Boolean)[0];
-  if (/github\.io$/.test(location.hostname) && repo && /Android/i.test(navigator.userAgent) && !/SinpungSimApp/.test(navigator.userAgent)) {
-    $('apklink').href = 'app.html';
-    $('apk').style.display = 'block';
-  }
+  if (/github\.io$/.test(location.hostname) && repo) APK_URL = 'https://github.com/' + owner + '/' + repo + '/releases/latest/download/sinpung-sim.apk';
 } catch(e){}
+
+function showAppPrompt(key){
+  $('f').hidden = true; $('hint').hidden = true; $('prog').style.display = 'none';
+  $('apkDl').href = APK_URL;
+  if (IS_KAKAO) {
+    $('kakaoBox').hidden = false;
+    $('extDl').href = 'kakaotalk://web/openExternal?url=' + encodeURIComponent(APK_URL);
+    $('apkDl').hidden = true;
+  }
+  $('appPrompt').hidden = false;
+  $('appPrompt').after($('meta')); // 버전 정보는 아래로
+  $('webBtn').onclick = async () => {
+    $('appPrompt').hidden = true;
+    try { await openSim(key); } catch(e){ $('appPrompt').hidden = false; msg(e.message || '오류가 발생했습니다.', true); }
+  };
+}
 
 async function deriveKey(password, saltB64, iter){
   const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveBits']);
@@ -171,6 +223,7 @@ async function start(password){
   }
   if (password && $('remember').checked) store.set({salt: manifest.kdf.salt, key: b64e(raw)});
   msg('');
+  if (IS_ANDROID) { showAppPrompt(key); return true; }
   await openSim(key);
   return true;
 }

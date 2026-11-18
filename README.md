@@ -20,7 +20,7 @@
 
 ## 주소
 
-- 웹 페이지: `https://<GitHub 아이디>.github.io/<저장소 이름>/`
+- 웹 페이지(하나로 통합): `https://<GitHub 아이디>.github.io/<저장소 이름>/` — 안드로이드는 비밀번호 확인 후 앱 설치 권장, 아이폰·PC는 바로 웹으로 실행
 - 앱 설치 파일: `https://github.com/<GitHub 아이디>/<저장소 이름>/releases/latest/download/sinpung-sim.apk`
   (안드로이드 휴대폰으로 웹 페이지를 열면 "안드로이드 앱 설치 파일 받기" 버튼이 보입니다)
 
