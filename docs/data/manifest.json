@@ -1,0 +1,219 @@
+{
+ "format": 1,
+ "version": "2026.11.18-1",
+ "updated": "2026-11-18 17:05",
+ "note": "첫 배포 (2026-11-18 규정 반영본)",
+ "kdf": {
+  "alg": "PBKDF2-SHA256",
+  "iter": 200000,
+  "salt": "GrXep0OFp3dknBbSdPpXgA=="
+ },
+ "check": "UdHxigAIDmCNlhQRPQkqygDzZx2hLAc7mxRL3DwNOZcwUgZMvISwUHYi",
+ "entry": "index.html",
+ "files": [
+  {
+   "path": "index.html",
+   "id": "fb166088395fc4f640fb",
+   "sha256": "fb166088395fc4f640fb1ed7926e81f50408ff8167524583295b1705503fe6ea",
+   "size": 151275
+  },
+  {
+   "path": "a/6441d0de854480d8.png",
+   "id": "96662b99ac68aeef3032",
+   "sha256": "96662b99ac68aeef3032b4eafccbe66fddb1bf39e4356298d204fc10c4a76e49",
+   "size": 1268336
+  },
+  {
+   "path": "a/c04857e657c98bf7.mp4",
+   "id": "3ea9e9ea13fb6418a08b",
+   "sha256": "3ea9e9ea13fb6418a08b1f15fa64815fb3c8a387140403945d570fd608e502da",
+   "size": 2627724
+  },
+  {
+   "path": "a/b1511d064f6944cd.webp",
+   "id": "a68dfb6f86b4fd9aa44a",
+   "sha256": "a68dfb6f86b4fd9aa44ae546cf4b6756a3000cf646ae4f49abf849bb11955249",
+   "size": 847174
+  },
+  {
+   "path": "a/0acaf49b615f30f2.webp",
+   "id": "e52efc4227d18eee3fad",
+   "sha256": "e52efc4227d18eee3fad52baf2e10a05d228241bebb81d626a4be7d214aecbb7",
+   "size": 96610
+  },
+  {
+   "path": "a/954c647d4afe77f9.webp",
+   "id": "b9494b6e9f2678989b3c",
+   "sha256": "b9494b6e9f2678989b3cd537434e6463ebf88517cdaeef0be57ce69d7aea5656",
+   "size": 53204
+  },
+  {
+   "path": "a/a65b78cabfb6e1b0.webp",
+   "id": "7419ee2b77fc08f98a6c",
+   "sha256": "7419ee2b77fc08f98a6c3437de48def74ae02c585ce846898bcc98795f13c61a",
+   "size": 50600
+  },
+  {
+   "path": "a/2bb81676a3305fa9.webp",
+   "id": "ac15d6eeb2bd42ffbda2",
+   "sha256": "ac15d6eeb2bd42ffbda2cc92899f769a65f150b6124f58a69efe2baaffed0e05",
+   "size": 33340
+  },
+  {
+   "path": "a/3fa6fcb2a3e56c41.webp",
+   "id": "18496f8d1d814e1c98f6",
+   "sha256": "18496f8d1d814e1c98f69cd809ebab13274ef4aede23929cca132cb008bf3a50",
+   "size": 147439
+  },
+  {
+   "path": "a/fd8c2c97f4e6ce93.webp",
+   "id": "b1a7800600213a2b30fd",
+   "sha256": "b1a7800600213a2b30fd8d1a4f40b25fcd4a73f2705bea57345c98132acf1349",
+   "size": 682291
+  },
+  {
+   "path": "a/6c1e6918c96f0ce3.png",
+   "id": "2a447f9779de9c6aef95",
+   "sha256": "2a447f9779de9c6aef9586efd88688d69291c1bebdb3b009010619f7ae4166e8",
+   "size": 1187584
+  },
+  {
+   "path": "a/3bd8e82e7e1c1dff.png",
+   "id": "bdc16329063bdf681e0e",
+   "sha256": "bdc16329063bdf681e0e3cfbf95107c43b88ccf6f32b79996b44274a2160f0a5",
+   "size": 1360411
+  },
+  {
+   "path": "a/2bb42577bb10e61f.png",
+   "id": "b936c6cc8d7aef1493b3",
+   "sha256": "b936c6cc8d7aef1493b3ae5ff987d4f07d58ff8d8ebb4477d5b0eb599b536168",
+   "size": 1225664
+  },
+  {
+   "path": "a/20df4619b577fec9.png",
+   "id": "1231eb37bf8ee0eb9317",
+   "sha256": "1231eb37bf8ee0eb931758fe35cf74a577dde8516618af9f4bac247d659e8309",
+   "size": 1906417
+  },
+  {
+   "path": "a/46f9c8d5db7d367b.png",
+   "id": "005a759ccd30bdf8f256",
+   "sha256": "005a759ccd30bdf8f2569bb2f0b94e2c9000c57e82dc3d96b8f52fa4166793d1",
+   "size": 781872
+  },
+  {
+   "path": "a/6d12f158f6648eb3.png",
+   "id": "bb1f4875af69c55f8667",
+   "sha256": "bb1f4875af69c55f86672ecec4d6c7e571d1a2baa68cf3e6e222b5cea0b52cc9",
+   "size": 997073
+  },
+  {
+   "path": "a/ec2a6ddfca35fc11.png",
+   "id": "725d923efe273ef0d12f",
+   "sha256": "725d923efe273ef0d12f9ff87b46213f7eaa0644408f1a276a5d1f3def5784e2",
+   "size": 601579
+  },
+  {
+   "path": "a/43c859424596101e.png",
+   "id": "c9f7d55418f0ff7207f6",
+   "sha256": "c9f7d55418f0ff7207f6f69d480c463e19a1dc16c621101e7f65e19a8b140acc",
+   "size": 798736
+  },
+  {
+   "path": "a/d0a0ffb05cdd7e23.png",
+   "id": "654e4da70ab3feef0e44",
+   "sha256": "654e4da70ab3feef0e446c782a8d67c5ceb2d018aa0805c11d60bdc90cf27d1c",
+   "size": 299817
+  },
+  {
+   "path": "a/bc3e12ecd8057cc5.png",
+   "id": "4c188bfade8c6aee2a66",
+   "sha256": "4c188bfade8c6aee2a66131d0c76ee3342396543e3aff56369d7a917efa431a0",
+   "size": 86968
+  },
+  {
+   "path": "a/a883851182fac16f.png",
+   "id": "660afdffc8b1c6b1a66a",
+   "sha256": "660afdffc8b1c6b1a66a8415862b326e2e360e24953455e919c7e24d138bf44b",
+   "size": 36453
+  },
+  {
+   "path": "a/fdec5134d043a932.png",
+   "id": "a920363bb8cd3d543246",
+   "sha256": "a920363bb8cd3d5432461066c70217ef8ff10c9b82ae989a300ff8514ca62936",
+   "size": 812995
+  },
+  {
+   "path": "a/f62cb6cc653bd3f7.gif",
+   "id": "82100202aac8dbf8a62f",
+   "sha256": "82100202aac8dbf8a62f36e7fe75297b2929d8b38d367be9f34036fe17234a82",
+   "size": 1970517
+  },
+  {
+   "path": "a/429d0753c0b358c7.png",
+   "id": "04621aafacb7525bab39",
+   "sha256": "04621aafacb7525bab3970b6416965661a4c23de4250f6345c3f4811ebcc35d7",
+   "size": 545682
+  },
+  {
+   "path": "a/d0f6b4bfb2fad7f0.png",
+   "id": "2b5434b53531d69a7a84",
+   "sha256": "2b5434b53531d69a7a84e67d3fecff7822613a30d73d054c3181c91b8ea5a833",
+   "size": 784399
+  },
+  {
+   "path": "a/01565c98d5560683.webp",
+   "id": "bd88f7910b38760cd27a",
+   "sha256": "bd88f7910b38760cd27aa1b43e8d616ecba191f3e1a5a76a8bbd06792eda903d",
+   "size": 39902
+  },
+  {
+   "path": "a/9524249d2a0e71da.webp",
+   "id": "b45965026b082288f3e4",
+   "sha256": "b45965026b082288f3e4888ef4d599a0297614416a34de5f616f5a330be58280",
+   "size": 51350
+  },
+  {
+   "path": "a/04ba11dd9be84b6d.png",
+   "id": "e501467d65d9bd9cce37",
+   "sha256": "e501467d65d9bd9cce3713b287187d99151eb559e95f6889625dec6ebdd24bee",
+   "size": 3026303
+  },
+  {
+   "path": "a/0a53962220684321.gif",
+   "id": "a48663ebb1f3deb0a4a5",
+   "sha256": "a48663ebb1f3deb0a4a5d3b851ad8619921e431f02846bb134119aa05f9240eb",
+   "size": 977358
+  },
+  {
+   "path": "a/9e407df682fc988d.gif",
+   "id": "a3ec7f4732d01f88c53e",
+   "sha256": "a3ec7f4732d01f88c53edb367e6c79b979371a7423358d838c9b64ab2cd56cc5",
+   "size": 692738
+  },
+  {
+   "path": "a/c52e62b95a3b9514.png",
+   "id": "1681c89d0931a5e2a39c",
+   "sha256": "1681c89d0931a5e2a39ce248996b93ef18f232905e6beec109e473c79f5ab316",
+   "size": 3029422
+  },
+  {
+   "path": "a/cd5c2bbde382a73f.gif",
+   "id": "ba270b365758c71030e5",
+   "sha256": "ba270b365758c71030e509a671f9a7a74a7eb3edb0e54403fadc59e66a4ea2b9",
+   "size": 620167
+  },
+  {
+   "path": "a/675aabb4325d6762.webp",
+   "id": "022662daeb1030255088",
+   "sha256": "022662daeb103025508883a8c5f3acec1b8a06318af0837c3d3f802093913bef",
+   "size": 20292
+  },
+  {
+   "path": "a/3ca8137bb81e0050.webp",
+   "id": "b3d8f8b2b061b843f2d7",
+   "sha256": "b3d8f8b2b061b843f2d7138c5905eae8afc29ea67defdb4e79ca4fd56269dad6",
+   "size": 20672
+  }
+ ]
+}
